@@ -1,5 +1,4 @@
 from marshmallow import Schema, fields, validate
-import re
 
 
 class EnumValueField(fields.Str):

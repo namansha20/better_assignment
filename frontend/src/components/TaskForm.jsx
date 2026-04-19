@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 
+const INITIAL_FORM = { title: '', description: '', status: 'todo', priority: 'medium', due_date: '', category_id: '' }
+
 export default function TaskForm({ categories, onSubmit, editingTask, onCancel }) {
-  const initial = { title: '', description: '', status: 'todo', priority: 'medium', due_date: '', category_id: '' }
-  const [form, setForm] = useState(initial)
+  const [form, setForm] = useState(INITIAL_FORM)
 
   useEffect(() => {
     if (editingTask) {
@@ -15,7 +16,7 @@ export default function TaskForm({ categories, onSubmit, editingTask, onCancel }
         category_id: editingTask.category_id != null ? String(editingTask.category_id) : ''
       })
     } else {
-      setForm(initial)
+      setForm(INITIAL_FORM)
     }
   }, [editingTask])
 
@@ -28,7 +29,7 @@ export default function TaskForm({ categories, onSubmit, editingTask, onCancel }
     if (!payload.category_id) delete payload.category_id
     else payload.category_id = parseInt(payload.category_id, 10)
     onSubmit(payload)
-    setForm(initial)
+    setForm(INITIAL_FORM)
   }
 
   const inputStyle = { width: '100%', padding: '8px 10px', border: '1px solid #d1d5db', borderRadius: 6, fontSize: 14, boxSizing: 'border-box' }
