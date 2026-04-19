@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify
+from datetime import datetime, timezone
 from marshmallow import ValidationError
 from extensions import db
 from models import Task, StatusEnum, PriorityEnum
@@ -86,7 +87,6 @@ def update_task(task_id):
     if 'category_id' in data:
         task.category_id = data['category_id']
 
-    from datetime import datetime, timezone
     task.updated_at = datetime.now(timezone.utc)
     db.session.commit()
     return jsonify(task_schema.dump(task)), 200
